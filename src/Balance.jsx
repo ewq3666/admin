@@ -23,7 +23,7 @@ export const BalanceList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {balances.length ? balances.map(balance => (
+                    {balances.length ? balances?.map(balance => (
                         <tr key={balance.userId}>
                             <td>{balance.userId}</td>
                             <td>{balance.username}</td>
@@ -58,7 +58,7 @@ export const WithdrawalList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {withdrawals.length ? withdrawals.map(withdrawal => (
+                    {withdrawals?.length ? withdrawals?.map(withdrawal => (
                         <tr key={withdrawal.transactionId}>
                             <td>{withdrawal.transactionId}</td>
                             <td>{withdrawal.userId}</td>

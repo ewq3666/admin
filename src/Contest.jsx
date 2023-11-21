@@ -146,7 +146,7 @@ const ContestManager = () => {
         </thead>
         <tbody>
           {
-            contests.length ?
+            contests?.length ?
               contests?.map((contest) => (
                 <tr key={contest._id}>
                   <td>{contest.name}</td>

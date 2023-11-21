@@ -25,7 +25,7 @@ const TransactionList = () => {
           </tr>
         </thead>
         <tbody>
-          {transactions.length ? transactions.map(transaction => (
+          {transactions?.length ? transactions?.map(transaction => (
             <tr key={transaction.orderId}>
               <td>{transaction.orderId}</td>
               <td>{transaction.userId}</td>

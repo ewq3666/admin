@@ -50,7 +50,7 @@ function WithdrawalRequestsTable() {
                             <td>{request.userId}</td>
                             <td>${request.amount}</td>
                             <td>{request.status}</td>
-                            <td>${balances.length && balances?.find((item) => item.userId === request.userId).balance}</td>
+                            <td>${balances?.length && balances?.find((item) => item.userId === request.userId).balance}</td>
                             <td>
                                 {request.status === 'pending' && (
                                     <button onClick={() => handleApprove(request._id)}>Approve</button>
