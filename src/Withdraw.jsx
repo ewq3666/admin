@@ -45,7 +45,7 @@ function WithdrawalRequestsTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {requests.map(request => (
+                    {requests.length && requests?.map(request => (
                         <tr key={request._id}>
                             <td>{request.userId}</td>
                             <td>${request.amount}</td>
