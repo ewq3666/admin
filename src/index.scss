@@ -61,7 +61,6 @@
 }
 
 .contest-manager {
-  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -461,5 +460,73 @@ button:hover {
   .ant-table-thead>tr>th,
   .ant-table-tbody>tr>td {
     min-width: 100px;
+  }
+}
+
+.contest-manager {
+  background: rgba(255, 255, 255, 0.15); /* Glass background color with transparency */
+  backdrop-filter: blur(10px); /* Apply blur effect to the background */
+  border-radius: 10px; /* Adjust the border radius as needed */
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1); /* Box shadow for the glass effect */
+
+  form {
+    /* Additional styles for the form within the glass container */
+    margin-bottom: 20px;
+    label {
+      color: #0f0707; /* Label text color */
+    }
+    input {
+      background: rgba(255, 255, 255, 0.1); /* Input background color with transparency */
+      color: #050303; /* Input text color */
+      border: 1px solid #0c0606; /* Input border color */
+      border-radius: 5px; /* Input border radius */
+      margin-bottom: 10px;
+      padding: 8px;
+      &:focus {
+        outline: none;
+        border: 1px solid #00bcd4; /* Adjust the focus border color */
+      }
+    }
+    button {
+      background: #00bcd4; /* Button background color */
+      color: #fff; /* Button text color */
+      border: none;
+      border-radius: 5px; /* Button border radius */
+      padding: 10px 20px;
+      cursor: pointer;
+      &:hover {
+        background: #009688; /* Adjust the hover background color */
+      }
+    }
+  }
+
+  .ant-table {
+    background: rgba(255, 255, 255, 0.1); /* Table background color with transparency */
+    border-radius: 10px; /* Table border radius */
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1); /* Table box shadow for the glass effect */
+
+    th,
+    td {
+      color: #140648; /* Table text color */
+    }
+
+    .ant-table-content {
+      border-radius: 10px; /* Adjust the content border radius */
+    }
+  }
+
+  .ant-modal {
+    background: rgba(255, 255, 255, 0.15); /* Modal background color with transparency */
+    backdrop-filter: blur(10px); /* Apply blur effect to the modal background */
+    border-radius: 10px; /* Modal border radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1); /* Modal box shadow for the glass effect */
+
+    .ant-modal-body {
+      padding: 20px;
+      color: #fff; /* Modal text color */
+    }
   }
 }

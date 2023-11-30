@@ -36,6 +36,7 @@ const Dashboard = () => {
 
 
     const menuItems = [
+        { key: '8', icon: <UploadOutlined />, text: 'Home', to: '/home' },
         { key: '1', icon: <UserOutlined />, text: 'Contest', to: '/contest' },
         { key: '2', icon: <VideoCameraOutlined />, text: 'Payments', to: '/payments' },
         { key: '3', icon: <UploadOutlined />, text: 'Balance', to: '/balance' },
@@ -43,7 +44,6 @@ const Dashboard = () => {
         { key: '5', icon: <UploadOutlined />, text: 'Withdraw Transactions', to: '/withdrawtransactions' },
         { key: '6', icon: <UploadOutlined />, text: 'Withdrawal Requests', to: '/withdrawalrequeststable' },
         { key: '7', icon: <UploadOutlined />, text: 'Add Questions', to: '/addquestions' },
-        { key: '8', icon: <UploadOutlined />, text: 'Home', to: '/home' },
     ];
 
     const menuItemsJSX = menuItems.map((item) => (
