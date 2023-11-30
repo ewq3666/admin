@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { END_POINTS } from './domain';
 import WinningsPopover, { UsersTable } from './WinningsPopover';
-import { Modal, notification } from "antd"
+import { Modal, notification, Table, Button, Space, Popconfirm } from 'antd';
+import { DeleteOutlined, InfoCircleOutlined } from '@ant-design/icons';
 
 const ContestManager = () => {
   const [contests, setContests] = useState([]);
@@ -10,12 +11,12 @@ const ContestManager = () => {
   const [price, setPrice] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [loading, setloading] = useState(true)
-  const [winnings, setwinnings] = useState({ from: 0, to: 0, amount: 0 })
-  const [totalWinning, settotalWinning] = useState([])
-  const [showPopover, setShowPopover] = useState(false); // State to control popover visibility
-  const [popoverData, setPopoverData] = useState([]); // State to store popover data
-  const [contestId, setcontestId] = useState(0)
+  const [loading, setloading] = useState(true);
+  const [winnings, setwinnings] = useState({ from: 0, to: 0, amount: 0 });
+  const [totalWinning, settotalWinning] = useState([]);
+  const [showPopover, setShowPopover] = useState(false);
+  const [popoverData, setPopoverData] = useState([]);
+  const [contestId, setcontestId] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -29,6 +30,7 @@ const ContestManager = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   useEffect(() => {
     // Fetch contests from the API
     axios.get(END_POINTS.contest)
@@ -37,15 +39,15 @@ const ContestManager = () => {
   }, []);
 
   const winningAdd = (e) => {
-    const { name, value } = e.target
-    setwinnings((prev) => ({ ...prev, [name]: value }))
+    const { name, value } = e.target;
+    setwinnings((prev) => ({ ...prev, [name]: value }));
     console.log(e.target.name);
-  }
+  };
+
   const addContest = async (e) => {
     e.preventDefault();
 
     // Send a POST request to add a new contest
-
     await axios.post(END_POINTS.contest, { name, price, date, time, winnings: totalWinning })
       .then(response => {
         setContests([...contests, response.data]);
@@ -58,22 +60,22 @@ const ContestManager = () => {
   };
 
   const handleWinningsClick = (winnings, id) => {
-    setPopoverData(winnings); // Set popover data
-    setShowPopover(true); // Show popover
-    setcontestId(id)
-    showModal()
+    setPopoverData(winnings);
+    setShowPopover(true);
+    setcontestId(id);
+    showModal();
   };
 
   const handleClosePopover = () => {
-    setShowPopover(false); // Hide popover
+    setShowPopover(false);
   };
 
   const addWinning = () => {
-    settotalWinning([...totalWinning, winnings])
+    settotalWinning([...totalWinning, winnings]);
     console.log(totalWinning);
-  }
+  };
+
   const deleteContest = (id) => {
-    console.log(id);
     // Send a DELETE request to remove a contest
     axios.delete(`${END_POINTS.contest}/${id}`)
       .then(response => {
@@ -83,9 +85,52 @@ const ContestManager = () => {
       .catch(error => console.error(error));
   };
 
-  const usersJoined=(users,id)=>{
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+    },
+    {
+      title: 'Date',
+      dataIndex: 'date',
+      key: 'date',
+    },
+    {
+      title: 'Time',
+      dataIndex: 'time',
+      key: 'time',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <Popconfirm
+            title="Are you sure you want to delete this contest?"
+            onConfirm={() => deleteContest(record._id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="danger" icon={<DeleteOutlined />} />
+          </Popconfirm>
+        </Space>
+      ),
+    },
+    {
+      title: 'Details',
+      key: 'details',
+      render: (text, record) => (
+        <Button onClick={() => handleWinningsClick(record.winnings, record._id)} icon={<InfoCircleOutlined />} />
+      ),
+    },
+  ];
 
-  }
   return (
     <div className="contest-manager">
       <form onSubmit={addContest}>
@@ -105,12 +150,11 @@ const ContestManager = () => {
           <label>Time:</label>
           <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
         </div>
-        <div >
+        <div>
           <br />
           <label>Winnings:</label>
           <br />
           <div style={{ display: 'flex' }}>
-
             <label>from:</label>
             <input type="number" placeholder='from' value={winnings.from} name='from' onChange={(e) => winningAdd(e)} />
             <br />
@@ -132,47 +176,22 @@ const ContestManager = () => {
         <button type="submit">Add Contest</button>
       </form>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Action</th>
-            <th>Details</th>
-          
-          </tr>
-        </thead>
-        <tbody>
-          {
-            contests?.length ?
-              contests?.map((contest) => (
-                <tr key={contest._id}>
-                  <td>{contest.name}</td>
-                  <td>{contest.price}</td>
-                  <td>{contest.date}</td>
-                  <td>{contest.time}</td>
-                  <td>
-                    <button onClick={() => deleteContest(contest._id)}>Delete</button>
-                  </td>
-                  <td>
-                    <button onClick={() => handleWinningsClick(contest.winnings, contest._id)}>Details</button>
-                  </td>
-                
-                </tr>
-              )) : ""}
-        </tbody>
-      </table>
-      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Table
+        dataSource={contests}
+        columns={columns}
+        rowKey={(record) => record._id}
+        pagination={{ pageSize: 10 }}
+      />
+
+      <Modal title="Basic Modal" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <WinningsPopover
-          winningsData={contests.find((item)=>item._id == contestId)?.winnings}
+          winningsData={contests.find((item) => item._id === contestId)?.winnings}
           onClose={handleClosePopover}
           showBtn={false}
         />
         <br />
         <UsersTable
-          winningsData={contests.find((item)=>item._id == contestId)?.users}
+          winningsData={contests.find((item) => item._id === contestId)?.users}
           onClose={handleClosePopover}
           showBtn={false}
         />

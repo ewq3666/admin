@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { END_POINTS } from './domain';
-// import './AddQuestionComponent.scss'; // Import your SCSS file
+import { Select, Input, Button, List } from 'antd';
+// import 'antd/dist/antd.css';
+
+const { Option } = Select;
 
 function AddQuestion() {
   const [question, setQuestion] = useState('');
@@ -40,8 +43,8 @@ function AddQuestion() {
     setOptions(newOptions);
   };
 
-  const handleCorrectOptionChange = (e) => {
-    setCorrectOptionIndex(parseInt(e.target.value, 10));
+  const handleCorrectOptionChange = (value) => {
+    setCorrectOptionIndex(value);
   };
 
   const handleAddQuestion = async () => {
@@ -72,18 +75,23 @@ function AddQuestion() {
         <h2>Add Question</h2>
         <div>
           <label htmlFor="selectContest" className="label">Select Contest:</label>
-          <select id="selectContest" value={selectedContest} onChange={(e) => handleContestClick(e.target.value)} className="select">
-            <option value="">Select a contest</option>
+          <Select
+            id="selectContest"
+            value={selectedContest}
+            onChange={handleContestClick}
+            className="select"
+            placeholder="Select a contest"
+          >
             {contests?.result?.length && contests.result?.map((contest) => (
-              <option key={contest._id} value={contest._id}>
+              <Option key={contest._id} value={contest._id}>
                 {contest.name}
-              </option>
+              </Option>
             ))}
-          </select>
+          </Select>
         </div>
         <div>
           <label htmlFor="questionInput" className="label">Question:</label>
-          <input
+          <Input
             id="questionInput"
             type="text"
             value={question}
@@ -95,7 +103,7 @@ function AddQuestion() {
           <label className="label">Options:</label>
           {options.map((option, index) => (
             <div key={index}>
-              <input
+              <Input
                 type="text"
                 value={option}
                 onChange={(e) => handleOptionChange(index, e)}
@@ -106,44 +114,61 @@ function AddQuestion() {
         </div>
         <div>
           <label className="label">Correct Option:</label>
-          <select value={correctOptionIndex} onChange={handleCorrectOptionChange} className="select">
+          <Select
+            value={correctOptionIndex}
+            onChange={handleCorrectOptionChange}
+            className="select"
+          >
             {options.map((option, index) => (
-              <option key={index} value={index}>
+              <Option key={index} value={index}>
                 Option {index + 1}
-              </option>
+              </Option>
             ))}
-          </select>
+          </Select>
         </div>
-        <button onClick={handleAddQuestion} className="button">Add Question</button>
+        <Button onClick={handleAddQuestion} type="primary" className="button">
+          Add Question
+        </Button>
 
         {/* Display list of contests */}
         <div>
           <h3 className="listHeader">List of Contests</h3>
-          <ul className="list">
-            {contests?.result?.map((contest) => (
-              <li key={contest._id} onClick={() => handleContestClick(contest._id)} className="listItem">
+          <List
+            className="list"
+            dataSource={contests?.result}
+            renderItem={(contest) => (
+              <List.Item
+                key={contest._id}
+                onClick={() => handleContestClick(contest._id)}
+                className="listItem"
+              >
                 {contest.name}
-              </li>
-            ))}
-          </ul>
+              </List.Item>
+            )}
+          />
         </div>
 
         {/* Display questions for the selected contest */}
         {contestQuestions?.length > 0 && (
           <div>
             <h3 className="listHeader">Questions for Selected Contest</h3>
-            <ul className="list">
-              {contestQuestions[0].quizzes.map((question, index) => (
-                <li key={index} className="listItem">
+            <List
+              className="list"
+              dataSource={contestQuestions[0]?.quizzes}
+              renderItem={(question, index) => (
+                <List.Item key={index} className="listItem">
                   Question: {question.question} <br />
                   Options:
-                  <ol>
-                    {question.options.map((item, i) => <li key={i}>{item}</li>)}
-                  </ol>
+                  <List
+                    dataSource={question.options}
+                    renderItem={(item, i) => (
+                      <List.Item key={i}>{item}</List.Item>
+                    )}
+                  />
                   Correct Option Index: {question.correctOptionIndex}
-                </li>
-              ))}
-            </ul>
+                </List.Item>
+              )}
+            />
           </div>
         )}
       </div>

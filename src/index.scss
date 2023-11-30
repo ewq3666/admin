@@ -1,4 +1,9 @@
 /* Dashboard.css */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .dashboard {
   display: flex;
@@ -361,4 +366,79 @@ button:hover {
     background-color: #f0f0f0;
   }
   
+}
+
+/* Dashboard.css */
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.content {
+  transition: margin-left 0.3s;
+}
+
+@media (max-width: 767px) {
+  .ant-layout-sider-collapsed .trigger {
+    font-size: 18px;
+    padding: 0;
+  }
+
+  .ant-layout-sider-collapsed .logo {
+    margin: 16px 0;
+  }
+
+  .ant-layout-sider-collapsed .ant-menu-item {
+    padding: 0;
+  }
+
+  .ant-layout-sider-collapsed .ant-menu-item-icon {
+    margin-left: 8px;
+  }
+}
+
+@media screen and (max-width:1024px) {
+  .ant-layout-sider{
+    position: fixed !important;
+    z-index: 9999;
+  }
+}
+
+.drawerham{
+  z-index: 999999999;
+}
+
+// Home.scss
+
+.home-container {
+  padding: 24px;
+}
+
+.home-tile {
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  .ant-card-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

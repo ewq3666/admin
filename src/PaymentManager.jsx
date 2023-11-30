@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Table, Button, Space } from 'antd';
 import { END_POINTS } from './domain';
 
 const PaymentManager = () => {
@@ -15,32 +16,38 @@ const PaymentManager = () => {
     setWithdrawalRequests(withdrawalRequests.filter(request => request.id !== id));
   };
 
+  const columns = [
+    {
+      title: 'Username',
+      dataIndex: 'userId',
+      key: 'userId',
+    },
+    {
+      title: 'Amount',
+      dataIndex: 'withdrawalAmount',
+      key: 'withdrawalAmount',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <Button type="primary" onClick={() => handleProcessWithdrawal(record.id)}>
+            Process Payment
+          </Button>
+        </Space>
+      ),
+    },
+  ];
+
   return (
     <div className="payment-manager">
       <h2>Withdrawal Requests</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Amount</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {withdrawalRequests.length && withdrawalRequests.map(request => (
-            <tr key={request.id}>
-              {console.log(request)}
-              <td>{request.userId}</td>
-              <td>${request.withdrawalAmount}</td>
-              <td>
-                <button onClick={() => handleProcessWithdrawal(request.id)}>
-                  Process Payment
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table
+        dataSource={withdrawalRequests}
+        columns={columns}
+        rowKey={(record) => record.id}
+      />
     </div>
   );
 };
