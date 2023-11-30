@@ -1,5 +1,5 @@
 /* Dashboard.css */
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -250,7 +250,8 @@
   width: 100%;
 }
 
-.withdrawal-table th, .withdrawal-table td {
+.withdrawal-table th,
+.withdrawal-table td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
@@ -280,11 +281,14 @@ table {
   border-collapse: collapse;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid #ddd;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: left;
 }
@@ -305,7 +309,7 @@ button:hover {
   background-color: #45a049;
 }
 
-.questions{
+.questions {
   .container {
     font-family: Arial, sans-serif;
     max-width: 600px;
@@ -315,12 +319,12 @@ button:hover {
     border-radius: 5px;
     background-color: #f9f9f9;
   }
-  
+
   .label {
     margin-bottom: 5px;
     display: block;
   }
-  
+
   .input,
   .select {
     width: calc(100% - 12px);
@@ -329,7 +333,7 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 3px;
   }
-  
+
   .button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -338,21 +342,21 @@ button:hover {
     border-radius: 3px;
     cursor: pointer;
   }
-  
+
   .button:hover {
     background-color: #0056b3;
   }
-  
+
   .listHeader {
     margin-top: 20px;
     margin-bottom: 10px;
   }
-  
+
   .list {
     list-style-type: none;
     padding: 0;
   }
-  
+
   .listItem {
     padding: 8px;
     margin-bottom: 5px;
@@ -361,11 +365,11 @@ button:hover {
     border-radius: 3px;
     background-color: #fff;
   }
-  
+
   .listItem:hover {
     background-color: #f0f0f0;
   }
-  
+
 }
 
 /* Dashboard.css */
@@ -412,13 +416,20 @@ button:hover {
 }
 
 @media screen and (max-width:1024px) {
-  .ant-layout-sider{
+  .content {
+    transition: margin-left 0.3s;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .ant-layout-sider {
     position: fixed !important;
     z-index: 9999;
+    height: 100%;
   }
 }
 
-.drawerham{
+.drawerham {
   z-index: 999999999;
 }
 
@@ -440,5 +451,15 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+.ant-table {
+  overflow-x: auto;
+  white-space: nowrap;
+
+  .ant-table-thead>tr>th,
+  .ant-table-tbody>tr>td {
+    min-width: 100px;
   }
 }
