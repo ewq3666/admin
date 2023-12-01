@@ -17,11 +17,13 @@ const TransactionList = () => {
       title: 'Order ID',
       dataIndex: 'orderId',
       key: 'orderId',
+      
     },
     {
       title: 'User ID',
       dataIndex: 'userId',
       key: 'userId',
+      fixed: 'left',
     },
     {
       title: 'User Email',

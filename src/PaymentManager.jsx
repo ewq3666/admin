@@ -21,6 +21,7 @@ const PaymentManager = () => {
       title: 'Username',
       dataIndex: 'userId',
       key: 'userId',
+      fixed: 'left',
     },
     {
       title: 'Amount',

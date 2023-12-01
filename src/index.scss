@@ -64,6 +64,10 @@
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
+  .contestAction{
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 .contest-manager form div {
@@ -311,7 +315,7 @@ button:hover {
 .questions {
   .container {
     font-family: Arial, sans-serif;
-    max-width: 600px;
+    max-width: 90%;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -464,7 +468,7 @@ button:hover {
 }
 
 .contest-manager {
-  background: rgba(255, 255, 255, 0.15); /* Glass background color with transparency */
+  background: rgb(255, 255, 255); /* Glass background color with transparency */
   backdrop-filter: blur(10px); /* Apply blur effect to the background */
   border-radius: 10px; /* Adjust the border radius as needed */
   padding: 20px;
@@ -505,7 +509,6 @@ button:hover {
   .ant-table {
     background: rgba(255, 255, 255, 0.1); /* Table background color with transparency */
     border-radius: 10px; /* Table border radius */
-    overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1); /* Table box shadow for the glass effect */
 
     th,
@@ -529,4 +532,10 @@ button:hover {
       color: #fff; /* Modal text color */
     }
   }
+}
+
+#multipleQuestionsTextarea{
+  width: 100% !important;
+  height: 10rem !important;
+  border: 2px solid #a1a1a1 !important;
 }

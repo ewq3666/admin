@@ -5,6 +5,7 @@ import Dashboard from './Dashboard';
 import Home from './Home';
 import PaymentManager from './PaymentManager';
 import AddQuestion from './Question';
+import ContestRanks from './Result';
 import WithdrawalRequestsTable from './Withdraw';
 import logo from './logo.svg';
 import { BrowserRouter as Router, useRoutes } from 'react-router-dom'
@@ -29,6 +30,7 @@ function App() {
         { path: "WithdrawalRequestsTable", element: <WithdrawalRequestsTable /> },
         { path: "addquestions", element: <AddQuestion /> },
         { path: "home", element: <Home /> },
+        { path: "result", element: <ContestRanks /> },
       ],
     },
   ]);

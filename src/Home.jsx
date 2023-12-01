@@ -15,6 +15,7 @@ const Home = () => {
         { key: '6', title: 'Withdrawal Requests', icon: <UploadOutlined />, to: '/withdrawalrequeststable' },
         { key: '7', title: 'Add Questions', icon: <UploadOutlined />, to: '/addquestions' },
         { key: '8', title: 'Home', icon: <UploadOutlined />, to: '/home' },
+        { key: '9', title: 'Ranks / Result', icon: <UploadOutlined />, to: '/result' },
       ];
       
 

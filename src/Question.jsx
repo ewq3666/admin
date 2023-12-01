@@ -13,6 +13,7 @@ function AddQuestion() {
   const [contests, setContests] = useState([]);
   const [selectedContest, setSelectedContest] = useState('');
   const [contestQuestions, setContestQuestions] = useState([]);
+  const [multipleQuestions, setMultipleQuestions] = useState('');
 
   useEffect(() => {
     // Fetch contests from the server
@@ -67,6 +68,20 @@ function AddQuestion() {
     fetchQuestionsForContest(contestId);
   };
 
+  const handleAddMultipleQuestions = async () => {
+    console.log(multipleQuestions);
+    try {
+      // Split the textarea value into an array of questions
+      const response = await axios.post(`${END_POINTS.addQuize}${selectedContest}`, {
+        quizzes:multipleQuestions,
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="questions">
       <br />
@@ -90,46 +105,18 @@ function AddQuestion() {
           </Select>
         </div>
         <div>
-          <label htmlFor="questionInput" className="label">Question:</label>
-          <Input
-            id="questionInput"
-            type="text"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            className="input"
+          <label htmlFor="multipleQuestionsTextarea" className="label">Multiple Questions:</label>
+          <textarea
+            id="multipleQuestionsTextarea"
+            value={multipleQuestions}
+            onChange={(e) => setMultipleQuestions(e.target.value)}
+            className="textarea"
+            rows={5}
           />
         </div>
-        <div>
-          <label className="label">Options:</label>
-          {options.map((option, index) => (
-            <div key={index}>
-              <Input
-                type="text"
-                value={option}
-                onChange={(e) => handleOptionChange(index, e)}
-                className="input"
-              />
-            </div>
-          ))}
-        </div>
-        <div>
-          <label className="label">Correct Option:</label>
-          <Select
-            value={correctOptionIndex}
-            onChange={handleCorrectOptionChange}
-            className="select"
-          >
-            {options.map((option, index) => (
-              <Option key={index} value={index}>
-                Option {index + 1}
-              </Option>
-            ))}
-          </Select>
-        </div>
-        <Button onClick={handleAddQuestion} type="primary" className="button">
-          Add Question
+        <Button onClick={handleAddMultipleQuestions} type="primary" className="button">
+          Add Multiple Questions
         </Button>
-
         {/* Display list of contests */}
         <div>
           <h3 className="listHeader">List of Contests</h3>

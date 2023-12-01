@@ -57,6 +57,7 @@ export const WithdrawalList = () => {
       title: 'Transaction ID',
       dataIndex: 'transactionId',
       key: 'transactionId',
+      fixed: 'left',
     },
     {
       title: 'User ID',

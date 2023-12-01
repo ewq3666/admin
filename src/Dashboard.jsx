@@ -44,6 +44,7 @@ const Dashboard = () => {
         { key: '5', icon: <UploadOutlined />, text: 'Withdraw Transactions', to: '/withdrawtransactions' },
         { key: '6', icon: <UploadOutlined />, text: 'Withdrawal Requests', to: '/withdrawalrequeststable' },
         { key: '7', icon: <UploadOutlined />, text: 'Add Questions', to: '/addquestions' },
+        { key: '9', icon: <UploadOutlined />, text: 'Ranks Result', to: '/result' },
     ];
 
     const menuItemsJSX = menuItems.map((item) => (
